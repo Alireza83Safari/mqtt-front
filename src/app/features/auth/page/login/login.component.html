@@ -1,0 +1,47 @@
+<section>
+  <form [formGroup]="loginForm" (submit)="submitLogin()">
+    <h1>Sign in to MQTT</h1>
+
+    <mat-form-field class="input-container">
+      <mat-label>Username</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="username"
+        [errorStateMatcher]="matcher"
+        placeholder="username"
+      />
+      <mat-error
+        *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['required']"
+        >Username is required</mat-error
+      >
+      <mat-error
+        *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['minlength']"
+        >Minimum length is 3 characters</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="input-container">
+      <mat-label>Password</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="password"
+        [errorStateMatcher]="matcher"
+        placeholder="password"
+      />
+      <mat-error
+        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
+        >Password is required</mat-error
+      >
+      <mat-error
+        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']"
+        >Minimum length is 8 characters</mat-error
+      >
+    </mat-form-field>
+
+    <button mat-flat-button class="button" (submit)="submitLogin()">
+      Login
+    </button>
+  </form>
+</section>
