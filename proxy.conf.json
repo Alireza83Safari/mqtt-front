@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://mqtt.mehdimohammadi.info",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
