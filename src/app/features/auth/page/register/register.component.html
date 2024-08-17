@@ -1,1 +1,189 @@
-<p>register works!</p>
+<section>
+  <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+    <h1>Sign up to unicorn</h1>
+
+    <div class="form-group">
+      <label for="username-input">username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username-input"
+        formControlName="username"
+        placeholder="username"
+        [ngClass]="{
+          'is-invalid':
+            registerForm.get('username')?.touched &&
+            registerForm.get('username')?.invalid
+        }"
+      />
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['required']"
+      >
+        username is required
+      </span>
+
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['minlength']"
+      >
+        Minimum length is 3 characters
+      </span>
+
+      <span class="error" *ngIf="serverErrors?.errors?.username">
+        {{ serverErrors?.errors?.username }}
+      </span>
+    </div>
+
+    <div class="row w-100 mt-3">
+      <div class="form-group col p-0 pe-1">
+        <label for="firstName-input">firstName</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName-input"
+          formControlName="firstName"
+          placeholder="firstName"
+          [ngClass]="{
+            'is-invalid':
+              registerForm.get('firstName')?.touched &&
+              registerForm.get('firstName')?.invalid
+          }"
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors?.['required']"
+        >
+          firstName is required
+        </span>
+
+        <span
+          class="invalid-feedback"
+          *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['minlength']"
+        >
+          Minimum length is 3 characters
+        </span>
+
+        <span class="invalid-feedback" *ngIf="serverErrors?.errors?.firstName">
+          {{ serverErrors?.errors?.firstName }}
+        </span>
+      </div>
+
+      <div class="form-group col p-0 ps-1">
+        <label for="lastName-input">lastName</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName-input"
+          formControlName="lastName"
+          placeholder="lastName"
+          [ngClass]="{
+            'is-invalid':
+              registerForm.get('lastName')?.touched &&
+              registerForm.get('lastName')?.invalid
+          }"
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.errors?.['required']"
+        >
+          lastName is required
+        </span>
+
+        <span
+          class="invalid-feedback"
+          *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['minlength']"
+        >
+          Minimum length is 3 characters
+        </span>
+
+        <span class="invalid-feedback" *ngIf="serverErrors?.errors?.lastName">
+          {{ serverErrors?.errors?.lastName }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="password-input">password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password-input"
+        formControlName="password"
+        placeholder="Enter password"
+        [ngClass]="{
+          'is-invalid':
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.invalid
+        }"
+      />
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']"
+      >
+        password is required
+      </span>
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']"
+      >
+        Minimum length is 8 characters
+      </span>
+
+      <span class="invalid-feedback" *ngIf="serverErrors?.errors?.password">
+        {{ serverErrors?.errors?.password }}
+      </span>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="confirmPassword-input">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword-input"
+        formControlName="confirmPassword"
+        placeholder="Enter confirmPassword"
+        [ngClass]="{
+            'is-invalid':
+              registerForm.get('confirmPassword')?.touched &&
+              (registerForm.get('confirmPassword')?.invalid ||
+                registerForm.errors?.['passwordMismatch'])
+          }"
+      />
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['required']"
+      >
+        Confirm Password is required
+      </span>
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['minlength']"
+      >
+        Minimum length is 8 characters
+      </span>
+      <span
+        class="invalid-feedback"
+        *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.errors?.['passwordMismatch']"
+      >
+        Passwords do not match
+      </span>
+
+      <span
+        class="invalid-feedback"
+        *ngIf="serverErrors?.errors?.confirmPassword"
+      >
+        {{ serverErrors?.errors?.confirmPassword }}
+      </span>
+    </div>
+
+    <button
+      mat-flat-button
+      class="btn btn-primary w-100 mt-4"
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
+  </form>
+</section>
