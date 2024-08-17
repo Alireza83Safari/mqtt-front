@@ -1,46 +1,72 @@
 <section>
-  <form [formGroup]="loginForm" (submit)="submitLogin()">
-    <h1>Sign in to MQTT</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+    <h1>Sign in to unicorn</h1>
 
-    <mat-form-field class="input-container">
-      <mat-label>Username</mat-label>
+    <span *ngIf="serverErrors?.length" class="error">{{ serverErrors }}</span>
+
+    <div class="form-group">
+      <label for="username-input">username</label>
       <input
         type="text"
-        matInput
+        class="form-control"
+        id="username-input"
         formControlName="username"
-        [errorStateMatcher]="matcher"
         placeholder="username"
+        [ngClass]="{
+          'is-invalid':
+            loginForm.get('username')?.touched &&
+            loginForm.get('username')?.invalid
+        }"
       />
-      <mat-error
+      <span
+        class="invalid-feedback"
         *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['required']"
-        >Username is required</mat-error
       >
-      <mat-error
+        username is required
+      </span>
+
+      <span
+        class="invalid-feedback"
         *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['minlength']"
-        >Minimum length is 3 characters</mat-error
       >
-    </mat-form-field>
+        Minimum length is 3 characters
+      </span>
+    </div>
 
-    <mat-form-field class="input-container">
-      <mat-label>Password</mat-label>
+    <div class="form-group mt-3">
+      <label for="password-input">password</label>
       <input
-        type="text"
-        matInput
+        type="password"
+        class="form-control"
+        id="password-input"
         formControlName="password"
-        [errorStateMatcher]="matcher"
-        placeholder="password"
+        placeholder="Enter password"
+        [ngClass]="{
+          'is-invalid':
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.invalid
+        }"
       />
-      <mat-error
+      <span
+        class="invalid-feedback"
         *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
-        >Password is required</mat-error
       >
-      <mat-error
+        password is required
+      </span>
+      <span
+        class="invalid-feedback"
         *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']"
-        >Minimum length is 8 characters</mat-error
       >
-    </mat-form-field>
+        Minimum length is 8 characters
+      </span>
+    </div>
 
-    <button mat-flat-button class="button" (submit)="submitLogin()">
+    <button
+      mat-flat-button
+      class="btn btn-primary w-100 mt-4"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
       Login
     </button>
   </form>
