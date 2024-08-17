@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PanelLayoutComponent } from './core/layout/panel-layout/panel-layout.component';
 
 const routes: Routes = [
   {
@@ -8,9 +9,10 @@ const routes: Routes = [
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'panel',
+    path: 'portal',
+    component: PanelLayoutComponent,
     loadChildren: () =>
-      import('./features/panel/panel.module').then((m) => m.PanelModule),
+      import('./features/portal/portal.module').then((m) => m.PortalModule),
   },
 ];
 
