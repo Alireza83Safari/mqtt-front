@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.profileService.getProfile().pipe(
-      map((response) => this.handleAuth(response)),
+      map((response) => this.handleAuth(response?.result?.permissions)),
       catchError(() => {
         this.router.navigate(['/auth/login']);
         return of(true);
@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate {
     );
   }
 
-  private handleAuth(response: any): boolean {
-    if (!this.checkPermissions(response.role.permissions)) {
+  private handleAuth(permissions: string[]): boolean {
+    if (!this.checkPermissions(permissions)) {
       this.router.navigate(['/auth/login']);
       return false;
     }
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  private checkPermissions(userPermissions: any[]): boolean {
+  private checkPermissions(userPermissions: string[]): boolean {
     const requiredPermission = this.getRequiredPermission(userPermissions);
     return requiredPermission;
   }
