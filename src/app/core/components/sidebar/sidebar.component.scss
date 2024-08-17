@@ -1,0 +1,24 @@
+#sidebar {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  background-color: #343a40;
+  color: #fff;
+}
+
+.nav-link {
+  color: #343a40;
+}
+
+.nav-link:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+}
+
+.router-link-active {
+  color: blue;
+  background-color: #dddd;
+}

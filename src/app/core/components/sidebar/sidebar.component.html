@@ -1,0 +1,16 @@
+<nav
+  id="sidebar"
+  class="d-md-block sidebar border-end bg-white h-100 overflow-hidden pt-2"
+>
+  <ul class="nav flex-column">
+    <li class="nav-item" *ngFor="let menu of menuItems">
+      <a
+        class="nav-link mb-2"
+        [routerLink]="[menu.navPath]"
+        routerLinkActive="router-link-active"
+      >
+        {{ menu?.name }}
+      </a>
+    </li>
+  </ul>
+</nav>
