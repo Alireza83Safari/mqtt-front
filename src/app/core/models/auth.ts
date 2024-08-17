@@ -6,7 +6,9 @@ export class Register extends Login {
   constructor(
     password: string,
     username: string,
-    public passwordConfirmation: string
+    public confirmPassword: string,
+    public firstName: string,
+    public lastName: string
   ) {
     super(username, password);
   }
