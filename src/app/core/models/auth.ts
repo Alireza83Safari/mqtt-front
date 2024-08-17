@@ -13,15 +13,3 @@ export class Register extends Login {
     super(username, password);
   }
 }
-
-export class User {
-  constructor(
-    public address: any,
-    public id: any,
-    public email: any,
-    public username: any,
-    public password: any,
-    public name: any,
-    public phone: any
-  ) {}
-}
