@@ -1,25 +1,29 @@
 <header
-  class="d-flex justify-content-between p-2 border-bottom fixed-top bg-white"
+  class="d-flex justify-content-between align-items-center p-2 border-bottom fixed-top bg-white mx-2"
 >
   <div>
     <h3>logo</h3>
   </div>
 
-  <div class="dropdown">
-    <button
-      class="btn btn-primary dropdown-toggle"
-      type="button"
-      id="dropdownMenuButton"
-      data-toggle="dropdown"
-      aria-haspopup="true"
+  <div class="dropdown text-end">
+    <a
+      href="#"
+      class="d-block link-dark text-decoration-none dropdown-toggle"
+      id="dropdownUser1"
+      data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      username
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">logout</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
+      <img
+        src="https://github.com/mdo.png"
+        alt="mdo"
+        width="32"
+        height="32"
+        class="rounded-circle"
+      />
+      {{ profileInfo?.username }}
+    </a>
+    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+      <li class="dropdown-item" (click)="logout()">Sign out</li>
+    </ul>
   </div>
 </header>
