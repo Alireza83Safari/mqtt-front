@@ -1,0 +1,48 @@
+<app-modal
+  [title]="'Edit Device'"
+  [isOpen]="isOpen"
+  (closeModal)="closeModal.emit()"
+>
+  <form [formGroup]="editDeviceForm" class="form">
+    <div class="form-group my-4">
+      <label for="exampleInputEmail1">Device Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        placeholder="Enter device name"
+        formControlName="displayName"
+        [ngClass]="{
+          'is-invalid':
+            editDeviceForm.get('displayName')?.touched &&
+            editDeviceForm.get('displayName')?.invalid
+        }"
+      />
+      <span
+        class="invalid-feedback"
+        *ngIf="editDeviceForm.get('displayName')?.touched && editDeviceForm.get('displayName')?.errors?.['required']"
+      >
+        displayName is required
+      </span>
+
+      <span
+        class="invalid-feedback"
+        *ngIf="editDeviceForm.get('displayName')?.touched && editDeviceForm.get('displayName')?.errors?.['maxlength']"
+      >
+        Maximum length is 20 characters
+      </span>
+    </div>
+    <button
+      class="btn btn-primary w-100"
+      type="submit"
+      (click)="submitEditDevice()"
+      [disabled]="editDeviceForm.invalid || isLoading"
+    >
+      <span *ngIf="!isLoading; else loader"> Submit </span>
+
+      <ng-template #loader>
+        <div class="spinner-border" role="status"></div>
+      </ng-template>
+    </button>
+  </form>
+</app-modal>

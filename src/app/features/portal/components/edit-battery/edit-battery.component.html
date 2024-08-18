@@ -1,0 +1,49 @@
+<app-modal
+  [title]="'Edit Battery'"
+  [isOpen]="isOpen"
+  (closeModal)="closeModal.emit()"
+>
+  <form [formGroup]="editBatteryForm" class="form">
+    <div class="form-group my-4">
+      <label for="exampleInputEmail1">Device Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        placeholder="Enter device name"
+        formControlName="displayName"
+        [ngClass]="{
+          'is-invalid':
+            editBatteryForm.get('displayName')?.touched &&
+            editBatteryForm.get('displayName')?.invalid
+        }"
+      />
+
+      <span
+        class="invalid-feedback"
+        *ngIf="editBatteryForm.get('displayName')?.touched && editBatteryForm.get('displayName')?.errors?.['required']"
+      >
+        displayName is required
+      </span>
+
+      <span
+        class="invalid-feedback"
+        *ngIf="editBatteryForm.get('displayName')?.touched && editBatteryForm.get('displayName')?.errors?.['maxlength']"
+      >
+        Maximum length is 20 characters
+      </span>
+    </div>
+    <button
+      class="btn btn-primary w-100"
+      type="submit"
+      (click)="submitEdit()"
+      [disabled]="editBatteryForm.invalid || isLoading"
+    >
+      <span *ngIf="!isLoading; else loader"> Submit </span>
+
+      <ng-template #loader>
+        <div class="spinner-border" role="status"></div>
+      </ng-template>
+    </button>
+  </form>
+</app-modal>
