@@ -10,7 +10,6 @@ export class UtilsService {
 
   buildHttpParams(params?: RequestFiler): HttpParams {
     let httpParams = new HttpParams();
-    console.log(params);
 
     if (params) {
       Object.keys(params).forEach((key) => {
@@ -21,5 +20,21 @@ export class UtilsService {
       });
     }
     return httpParams;
+  }
+
+  convertToRequestFilter(params: RequestFiler): RequestFiler {
+    const filter: RequestFiler = {};
+    if (params.page) {
+      filter.page = +params.page;
+    } else {
+      filter.page = 1;
+    }
+    if (params.limit) {
+      filter.limit = +params.limit;
+    } else {
+      filter.limit = 7;
+    }
+    if (params.searchTerm) filter.searchTerm = params.searchTerm;
+    return filter;
   }
 }

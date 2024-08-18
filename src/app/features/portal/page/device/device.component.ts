@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseDevice } from 'src/app/core/models/device';
 import { DeviceService } from 'src/app/core/services/device.service';
 
 @Component({
@@ -6,10 +7,6 @@ import { DeviceService } from 'src/app/core/services/device.service';
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.scss'],
 })
-export class DeviceComponent implements OnInit {
-  constructor(private deviceService: DeviceService) {}
+export class DeviceComponent  {
 
-  ngOnInit(): void {
-    this.deviceService.getDevices().subscribe((res) => console.log(res));
-  }
 }

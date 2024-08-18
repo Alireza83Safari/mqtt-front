@@ -1,0 +1,52 @@
+<table class="table table-bordered h-auto shadow w-100">
+  <thead>
+    <tr>
+      <th scope="col" class="bg-info-subtle py-3">Device Name</th>
+      <th scope="col" class="bg-info-subtle py-3">Current Avg</th>
+      <th scope="col" class="bg-info-subtle py-3">Last Current Avg</th>
+      <th scope="col" class="bg-info-subtle py-3">Last Soc Avg</th>
+      <th scope="col" class="bg-info-subtle py-3">Last Voltage Avg</th>
+      <th scope="col" class="bg-info-subtle py-3">SOC Avg</th>
+      <th scope="col" class="bg-info-subtle py-3">Voltage Avg</th>
+      <th scope="col" class="bg-info-subtle py-3">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="isLoading; else tableContent">
+      <tr>
+        <td colspan="8" class="text-center">
+          <div class="spinner-border" role="status"></div>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-template #tableContent>
+      <tr *ngFor="let device of devices" class="px-2">
+        <td>{{ device.displayName }}</td>
+        <td>{{ device.currentAvg }}</td>
+        <td>{{ device.lastCurrentAvg }}</td>
+        <td>{{ device.lastSocAvg }}</td>
+        <td>{{ device.lastVoltageAvg }}</td>
+        <td>{{ device.socAvg }}</td>
+        <td>{{ device.voltageAvg }}</td>
+        <td>
+          <button (click)="showModal(device)" class="btn btn-primary">
+            Edit
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <tr class="pt-3" *ngIf="totalPage !== 1">
+      <td colspan="8">
+        <app-pagination [totalPage]="totalPage"></app-pagination>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-edit-device
+  [isOpen]="isShowModal"
+  [editDeviceForm]="editDeviceForm"
+  (closeModal)="closeModal()"
+  [editDeviceId]="editDeviceId || ''"
+></app-edit-device>

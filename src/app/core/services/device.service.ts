@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ApiRoutes } from '../routes/apiRoute';
 import { RequestFiler, ServerParams, ServerResponse } from '../models/general';
 import { UtilsService } from './utils.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseDevice, Device, Metrics } from '../models/device';
 
 @Injectable({
@@ -11,6 +11,20 @@ import { BaseDevice, Device, Metrics } from '../models/device';
 })
 export class DeviceService {
   private apiUrl = 'api/v2/';
+  private initialServerParams: ServerParams<BaseDevice[]> = {
+    total: 0,
+    page: 1,
+    limit: 1,
+    lastPage: 1,
+    from: 0,
+    to: 0,
+    data: [],
+  };
+  private deviceSubject = new BehaviorSubject<ServerParams<BaseDevice[]>>(
+    this.initialServerParams
+  );
+  devices$ = this.deviceSubject.asObservable();
+
   constructor(private http: HttpClient, private utilsService: UtilsService) {}
 
   getDevices(
@@ -66,9 +80,6 @@ export class DeviceService {
     );
   }
 
-
-  
-
   editDevice({
     id,
     data,
@@ -77,8 +88,14 @@ export class DeviceService {
     data: { displayName: string };
   }): Observable<any> {
     return this.http.post<ServerResponse<ServerParams<Device>>>(
-      this.apiUrl + ApiRoutes.DEVICES + id + '/edit',
+      this.apiUrl + ApiRoutes.DEVICES + `/${id}/edit`,
       data
     );
+  }
+
+  refetchDevices(params?: RequestFiler) {
+    this.getDevices(params).subscribe((res) => {
+      this.deviceSubject.next(res.result);
+    });
   }
 }
