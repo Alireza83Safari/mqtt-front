@@ -5,10 +5,24 @@ import { PanelLayoutComponent } from './layout/portal-layout/portal-layout.compo
 import { BrowserModule } from '@angular/platform-browser';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { ModalComponent } from './components/modal/modal.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
-  declarations: [HeaderComponent, PanelLayoutComponent, SidebarComponent],
-  imports: [CommonModule, BrowserModule, RouterModule],
-  exports: [HeaderComponent, PanelLayoutComponent, SidebarComponent],
+  declarations: [
+    HeaderComponent,
+    PanelLayoutComponent,
+    SidebarComponent,
+    ModalComponent,
+    PaginationComponent,
+  ],
+  imports: [CommonModule, RouterModule],
+  exports: [
+    HeaderComponent,
+    PanelLayoutComponent,
+    SidebarComponent,
+    ModalComponent,
+    PaginationComponent,
+  ],
 })
 export class CoreModule {}
