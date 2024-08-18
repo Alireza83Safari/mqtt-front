@@ -7,7 +7,7 @@ export class ServerParams<T> {
     public total: number,
     public page: number,
     public limit: number,
-    public last_page: number,
+    public lastPage: number,
     public from: number,
     public to: number,
     public data: T
