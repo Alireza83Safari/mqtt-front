@@ -1,0 +1,9 @@
+<div class="modal" *ngIf="isOpen" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div>
+      <h4 class="modal-title">{{ title }}</h4>
+      <span class="close-modal" (click)="close()">X</span>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>
