@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseDevice } from 'src/app/core/models/device';
 import { RequestFiler } from 'src/app/core/models/general';
 import { DeviceService } from 'src/app/core/services/device.service';
@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 @Component({
   selector: 'app-device-table',
   templateUrl: './device-table.component.html',
+  styleUrls: ['./device-table.component.scss'],
 })
 export class DeviceTableComponent implements OnInit {
   isLoading: boolean = false;
@@ -23,7 +24,8 @@ export class DeviceTableComponent implements OnInit {
     private deviceService: DeviceService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -63,5 +65,9 @@ export class DeviceTableComponent implements OnInit {
 
   closeModal() {
     this.isShowModal = false;
+  }
+
+  navigateToDeviceDetails(id: string) {
+    this.router.navigate([`/portal/device/${id}/metric`]);
   }
 }

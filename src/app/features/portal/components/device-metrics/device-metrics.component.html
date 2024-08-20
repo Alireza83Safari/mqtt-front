@@ -1,0 +1,35 @@
+<div class="table-container">
+  <table class="table p-2 table-bordered rounded-3">
+    <thead>
+      <tr>
+        <th scope="col" class="bg-info-subtle py-3">Date</th>
+        <th scope="col" class="bg-info-subtle py-3">Cube Num</th>
+        <th scope="col" class="bg-info-subtle py-3">Cube Op</th>
+        <th scope="col" class="bg-info-subtle py-3">Current Avg</th>
+        <th scope="col" class="bg-info-subtle py-3">socAvg</th>
+        <th scope="col" class="bg-info-subtle py-3">Voltage Avg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="isLoading; else tableContent">
+        <tr>
+          <td colspan="6" class="text-center p-5">
+            <div class="spinner-border" role="status"></div>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #tableContent>
+        <tr *ngFor="let metric of metrics">
+          <td class="py-3">{{ metric.createdAt | slice : 0 : 10 }}</td>
+          <td class="py-3">{{ metric.cubeNum }}</td>
+          <td class="py-3">{{ metric.cubeOp }}</td>
+          <td class="py-3">{{ metric.currentAvg }}</td>
+          <td class="py-3">{{ metric.socAvg }}</td>
+          <td class="py-3">{{ metric.voltageAvg }}</td>
+        </tr>
+      </ng-template>
+
+      <app-pagination [totalPage]="totalPage"></app-pagination>
+    </tbody>
+  </table>
+</div>
