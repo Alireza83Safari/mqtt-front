@@ -6,6 +6,8 @@ export class PageRoutes {
   static ROLE = 'role';
   static DEVICE = 'device';
   static BATTERY = 'battery';
+  static BATTERY_SENSOR = 'battery/:id/sensor';
+  static DEVICE_METRIC = 'device/:id/metric';
 }
 
 export class PrivateRoutes {
