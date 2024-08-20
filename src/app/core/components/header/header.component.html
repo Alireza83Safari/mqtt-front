@@ -6,8 +6,7 @@
   </div>
 
   <div class="dropdown text-end">
-    <a
-      href="#"
+    <div
       class="d-block link-dark text-decoration-none dropdown-toggle"
       id="dropdownUser1"
       data-bs-toggle="dropdown"
@@ -21,7 +20,7 @@
         class="rounded-circle"
       />
       {{ profileInfo?.username }}
-    </a>
+    </div>
     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
       <li class="dropdown-item" (click)="logout()">Sign out</li>
     </ul>
