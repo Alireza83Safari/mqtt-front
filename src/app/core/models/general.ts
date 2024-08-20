@@ -22,10 +22,10 @@ export interface RequestFiler {
 
 export class ChartParams {
   constructor(
-    public id: string,
     public fromDate: string,
     public toDate: string,
-    public interval: 'second' | 'minute' | 'hour' | 'day' | 'weak' | 'month',
-    public intervalValue: number
+    public interval: any,
+    public intervalValue: number,
+    public limit: number
   ) {}
 }
