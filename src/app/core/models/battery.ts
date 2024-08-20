@@ -32,7 +32,8 @@ export class Sensors {
     public recommendedvDischarge: number,
     public stateTimeline: string,
     public status: number,
-    public timestamp: string
+    public timestamp: string,
+    public battState: number
   ) {}
 }
 

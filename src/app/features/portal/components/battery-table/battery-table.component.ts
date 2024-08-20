@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Battery } from 'src/app/core/models/battery';
 import { RequestFiler } from 'src/app/core/models/general';
 import { BatteryService } from 'src/app/core/services/battery.service';
@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 @Component({
   selector: 'app-battery-table',
   templateUrl: './battery-table.component.html',
+  styleUrls:['./battery-table.component.scss']
 })
 export class BatteryTableComponent implements OnInit {
   batteries!: Battery[];
@@ -23,7 +24,8 @@ export class BatteryTableComponent implements OnInit {
     private batteryService: BatteryService,
     private fb: FormBuilder,
     private utilsService: UtilsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -69,5 +71,9 @@ export class BatteryTableComponent implements OnInit {
 
   closeModal() {
     this.isOpen = false;
+  }
+
+  navigateToBatteryDetails(id: string) {
+    this.router.navigate([`/portal/battery/${id}/sensor`]);
   }
 }
