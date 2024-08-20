@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ServerResponse, RequestFiler, ServerParams } from '../models/general';
-import { Battery, Sensors } from '../models/battery';
+import {
+  ServerResponse,
+  RequestFiler,
+  ServerParams,
+  ChartParams,
+} from '../models/general';
+import { Battery, Sensors, SensorsChart } from '../models/battery';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiRoutes } from '../routes/apiRoute';
 import { UtilsService } from './utils.service';
@@ -57,9 +62,27 @@ export class BatteryService {
   }: {
     params: RequestFiler;
     id: string;
-  }): Observable<ServerResponse<ServerParams<Sensors>>> {
-    return this.http.get<ServerResponse<ServerParams<Sensors>>>(
-      this.apiUrl + ApiRoutes.BATTERY_SENSORS.replace('{id}', id)
+  }): Observable<ServerResponse<ServerParams<Sensors[]>>> {
+    const httpParams = this.utilsService.buildHttpParams(params);
+
+    return this.http.get<ServerResponse<ServerParams<Sensors[]>>>(
+      this.apiUrl + ApiRoutes.BATTERY_SENSORS.replace('{id}', id),
+      { params: httpParams }
+    );
+  }
+
+  getBatterySensorsChart({
+    params,
+    id,
+  }: {
+    params: ChartParams;
+    id: string;
+  }): Observable<ServerResponse<SensorsChart[]>> {
+    const httpParams = this.utilsService.buildHttpParams(params);
+
+    return this.http.get<ServerResponse<SensorsChart[]>>(
+      this.apiUrl + ApiRoutes.BATTERY_SENSORS_CHART.replace('{id}', id),
+      { params: httpParams }
     );
   }
 

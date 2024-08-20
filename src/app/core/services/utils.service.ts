@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { RequestFiler } from '../models/general';
+import { ChartParams, RequestFiler } from '../models/general';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { RequestFiler } from '../models/general';
 export class UtilsService {
   constructor() {}
 
-  buildHttpParams(params?: RequestFiler): HttpParams {
+  buildHttpParams(params?: RequestFiler | ChartParams): HttpParams {
     let httpParams = new HttpParams();
 
     if (params) {
@@ -36,5 +36,18 @@ export class UtilsService {
     }
     if (params.searchTerm) filter.searchTerm = params.searchTerm;
     return filter;
+  }
+
+  getCurrentDateTime(offset: number = 0): string {
+    const now = new Date();
+    now.setDate(now.getDate() + offset);
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 }

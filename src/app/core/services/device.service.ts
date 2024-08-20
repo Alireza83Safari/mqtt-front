@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiRoutes } from '../routes/apiRoute';
-import { RequestFiler, ServerParams, ServerResponse } from '../models/general';
+import {
+  ChartParams,
+  RequestFiler,
+  ServerParams,
+  ServerResponse,
+} from '../models/general';
 import { UtilsService } from './utils.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BaseDevice, Device, Metrics } from '../models/device';
+import { BaseDevice, Device, Metrics, MetricsChart } from '../models/device';
 
 @Injectable({
   providedIn: 'root',
@@ -57,10 +62,26 @@ export class DeviceService {
   }: {
     params?: RequestFiler;
     id?: string;
-  }): Observable<ServerResponse<ServerParams<Metrics>>> {
+  }): Observable<ServerResponse<ServerParams<Metrics[]>>> {
     const httpParams = this.utilsService.buildHttpParams(params);
-    return this.http.get<ServerResponse<ServerParams<Metrics>>>(
+    return this.http.get<ServerResponse<ServerParams<Metrics[]>>>(
       this.apiUrl + ApiRoutes.DEVICES + `/${id}` + '/metrics',
+      {
+        params: httpParams,
+      }
+    );
+  }
+
+  getDeviceMetricsChart({
+    params,
+    id,
+  }: {
+    params?: ChartParams;
+    id?: string;
+  }): Observable<ServerResponse<MetricsChart[]>> {
+    const httpParams = this.utilsService.buildHttpParams(params);
+    return this.http.get<ServerResponse<MetricsChart[]>>(
+      this.apiUrl + ApiRoutes.DEVICES + `/${id}` + '/metrics/chart',
       {
         params: httpParams,
       }
