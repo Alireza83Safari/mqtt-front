@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from './core/core.module';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { CoreModule } from './core/core.module';
     CommonModule,
     HttpClientModule,
     RouterModule,
+    NgApexchartsModule,
     CoreModule,
     ToastrModule.forRoot(),
   ],
