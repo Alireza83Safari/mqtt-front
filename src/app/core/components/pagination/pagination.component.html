@@ -3,7 +3,11 @@
   class="pagination-container position-absolute bottom-0"
 >
   <ul class="pagination">
-    <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+    <li
+      class="page-item"
+      [ngClass]="{ disabled: currentPage === 1 }"
+      *ngIf="totalPage !== 1"
+    >
       <span class="page-link" (click)="changePage(currentPage - 1)">
         Previous
       </span>
@@ -24,7 +28,11 @@
       <span class="page-link" *ngIf="page === -1">...</span>
     </li>
 
-    <li class="page-item" [ngClass]="{ disabled: currentPage === totalPage }">
+    <li
+      class="page-item"
+      [ngClass]="{ disabled: currentPage === totalPage }"
+      *ngIf="totalPage !== 1"
+    >
       <span class="page-link" (click)="changePage(currentPage + 1)">
         Next
       </span>
